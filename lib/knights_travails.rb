@@ -1,5 +1,5 @@
 require "byebug"
-require_relative "./00_tree_node.rb"
+require_relative "./tree_node.rb"
 
 
 class KnightPathFinder
@@ -34,16 +34,9 @@ class KnightPathFinder
   def find_path(target_position)
     target_node = bfs(target_position)
     return "No Path Found" unless target_node
-    #get_pathing_history(target_node.value)
     get_pathing_history(target_node)
   end
 
-
-  #take the actual node as an arguement
-  #stuff the node.value into pathing history
-  #loop : go.to.parent, stuff in parent.value until parent is nil
-  #clean the arguement for return
-  
   def get_pathing_history(node)
     history = [node.value]
     history += get_pathing_history(node.parent) if node.parent
@@ -60,7 +53,6 @@ class KnightPathFinder
       paths_of_the_knight(search)
       queue.push *search.children
       search.children.each { |child| stepped_at(child) }
-      #debugger
     end
     nil
   end
@@ -92,8 +84,3 @@ class KnightPathFinder
   end
 
 end
-
-
-a = KnightPathFinder.new([0,0])
-
-p a.find_path([2,1])
